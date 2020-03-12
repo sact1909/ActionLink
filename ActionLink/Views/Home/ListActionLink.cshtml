@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ListActionLink";
+}
+
+<h2>ListActionLink</h2>
+
+@Html.DropDownList("PostDDL", new SelectList(ViewBag.ListPost, "id", "title"), new { @class = "custom-select" })
+
+@Ajax.ActionLink("Get Post", // <-- Text to display
+                 "PartialTable", // <-- Action Method Name
+                 new { id=1 },
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "PostList", // <-- DOM element ID to update
+                     InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                     HttpMethod = "GET" // <-- HTTP method
+                 },
+                 new {@id="LinkLoad"})
+
+<div id="PostList"></div>
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#PostDDL").change(function(e){
+                //console.log($(this).val());
+                $("#LinkLoad").attr("href", "/Home/PartialTable/" + $(this).val());
+                $("#LinkLoad").click();
+            });
+        });
+
+
+    </script>
+}  
