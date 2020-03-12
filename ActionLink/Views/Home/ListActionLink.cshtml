@@ -5,7 +5,7 @@
 
 <h2>ListActionLink</h2>
 
-@Html.DropDownList("PostDDL", new SelectList(ViewBag.ListPost, "id", "title"), new { @class = "custom-select" })
+@Html.DropDownList("PostDDL", new SelectList(ViewBag.ListPost, "id", "title"), new { @class = "form-control" })
 
 @Ajax.ActionLink("Get Post", // <-- Text to display
                  "PartialTable", // <-- Action Method Name
